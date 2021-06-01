@@ -42,7 +42,7 @@ describe('Test the App component', () => {
   describe(
     'checks if the top of the application contains a fixed set of navigation links',
     () => {
-      test.only('if the first link has the text Home', () => {
+      test('if the first link has the text Home', () => {
         const { getByRole } = render(
           <MemoryRouter>
             <App />
@@ -50,6 +50,16 @@ describe('Test the App component', () => {
         );
         const homeLink = getByRole('link', { name: /^home$/i });
         expect(homeLink).toBeInTheDocument();
+      });
+
+      test.only('if the second link has the text About', () => {
+        const { getByRole } = render(
+          <MemoryRouter>
+            <App />
+          </MemoryRouter>,
+        );
+        const aboutLink = getByRole('link', { name: /^about$/i });
+        expect(aboutLink).toBeInTheDocument();
       });
     },
   );
