@@ -52,7 +52,7 @@ describe('Test the App component', () => {
         expect(homeLink).toBeInTheDocument();
       });
 
-      test.only('if the second link has the text About', () => {
+      test('if the second link has the text About', () => {
         const { getByRole } = render(
           <MemoryRouter>
             <App />
@@ -60,6 +60,16 @@ describe('Test the App component', () => {
         );
         const aboutLink = getByRole('link', { name: /^about$/i });
         expect(aboutLink).toBeInTheDocument();
+      });
+
+      test.only('if the third link has the text Favorite Pokémons', () => {
+        const { getByRole } = render(
+          <MemoryRouter>
+            <App />
+          </MemoryRouter>,
+        );
+        const favoriteLink = getByRole('link', { name: /^Favorite Pokémons$/i });
+        expect(favoriteLink).toBeInTheDocument();
       });
     },
   );
