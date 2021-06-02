@@ -89,7 +89,7 @@ describe('Test the App component', () => {
     expect(pathname).toBe('/');
   });
 
-  test.only(`if the application is redirected to the About page,
+  test(`if the application is redirected to the About page,
   in the URL /about by clicking on the About link in the navigation bar`,
   () => {
     const { getByRole, history } = renderWithRouter(
@@ -101,5 +101,20 @@ describe('Test the App component', () => {
     const { location: { pathname } } = history;
 
     expect(pathname).toBe('/about');
+  });
+
+  test(`if the application is redirected to the Pokémons 
+  Favoritados page, in the URL /favorites by clicking on the 
+  Favorite Pokémons link in the navigation bar`,
+  () => {
+    const { getByRole, history } = renderWithRouter(
+      <App />,
+    );
+
+    const favoritesLink = getByRole('link', { name: /^Favorite Pokémons$/i });
+    userEvent.click(favoritesLink);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/favorites');
   });
 });
