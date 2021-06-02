@@ -117,4 +117,17 @@ describe('Test the App component', () => {
 
     expect(pathname).toBe('/favorites');
   });
+
+  test(`if the application is redirected to the Not Found 
+  page when entering an unknown URL`,
+  () => {
+    const { getByRole, history } = renderWithRouter(
+      <App />,
+    );
+    history.push('/newpokemon');
+
+    const img = getByRole('img',
+      { name: /^Pikachu crying because the page requested was not found$/i });
+    expect(img).toBeInTheDocument();
+  });
 });
