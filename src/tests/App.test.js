@@ -78,12 +78,13 @@ describe('Test the App component', () => {
   test(`if the application is redirected to the home page,
   in the URL / by clicking on the Home link in the navigation bar`,
   () => {
-    const { getByRole, history: { location: { pathname } } } = renderWithRouter(
+    const { getByRole, history } = renderWithRouter(
       <App />,
     );
 
     const homeLink = getByRole('link', { name: /^home$/i });
     userEvent.click(homeLink);
+    const { location: { pathname } } = history;
 
     expect(pathname).toBe('/');
   });
