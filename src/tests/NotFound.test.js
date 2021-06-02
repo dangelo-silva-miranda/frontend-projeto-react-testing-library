@@ -12,4 +12,17 @@ describe('Test the NotFound component', () => {
       { level: 2, name: /^Page requested not found/i });
     expect(heading).toBeInTheDocument();
   });
+
+  test('if page shows a specific image', () => {
+    render(<NotFound />);
+
+    const imageSrc = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
+
+    const image = screen.getByRole('img',
+      {
+        name: /^Pikachu crying because the page requested was not found$/i,
+      });
+
+    expect(image).toHaveAttribute('src', imageSrc);
+  });
 });
