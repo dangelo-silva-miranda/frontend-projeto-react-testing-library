@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
@@ -62,7 +63,7 @@ describe('Test the App component', () => {
         expect(aboutLink).toBeInTheDocument();
       });
 
-      test.only('if the third link has the text Favorite Pokémons', () => {
+      test('if the third link has the text Favorite Pokémons', () => {
         const { getByRole } = render(
           <MemoryRouter>
             <App />
@@ -73,4 +74,17 @@ describe('Test the App component', () => {
       });
     },
   );
+
+  test(`if the application is redirected to the home page,
+  in the URL / by clicking on the Home link in the navigation bar`,
+  () => {
+    const { getByRole, history: { location: { pathname } } } = renderWithRouter(
+      <App />,
+    );
+
+    const homeLink = getByRole('link', { name: /^home$/i });
+    userEvent.click(homeLink);
+
+    expect(pathname).toBe('/');
+  });
 });
