@@ -88,4 +88,18 @@ describe('Test the App component', () => {
 
     expect(pathname).toBe('/');
   });
+
+  test.only(`if the application is redirected to the About page,
+  in the URL /about by clicking on the About link in the navigation bar`,
+  () => {
+    const { getByRole, history } = renderWithRouter(
+      <App />,
+    );
+
+    const aboutLink = getByRole('link', { name: /^about$/i });
+    userEvent.click(aboutLink);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/about');
+  });
 });
