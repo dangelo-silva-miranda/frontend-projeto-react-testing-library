@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen/* , cleanup */ } from '@testing-library/react';
 
+// import userEvent from '@testing-library/user-event';
 import { FavoritePokemons } from '../components';
 import renderWithRouter from './renderWithRouter';
 import pokemons from '../data';
+
+// import App from '../App';
+
 /*
   Material consultado sobre verificar se checkbox está checked
   https://stackoverflow.com/a/55178588
@@ -11,6 +15,21 @@ import pokemons from '../data';
 */
 describe('Test the FavoritePokemons component', () => {
   const [Pikachu, Charmander] = pokemons;
+  //  beforeEach(() => {
+  //   jest.resetModules();
+  //   cleanup();
+  // });
+  // afterEach(() => {
+  //   cleanup();
+  // });
+
+  // test.each(() => {
+  //   cleanup();
+  // });
+
+  // afterEach(() => {
+  //   jest.resetModules();
+  // });
 
   test(`if the message No favorite pokemon found is displayed on 
   the screen, if the person does not have favorite pokemons`,
@@ -42,7 +61,7 @@ describe('Test the FavoritePokemons component', () => {
       userEvent.click(moreDetailsLink);
 
       const favoriteCheckbox = screen.getByRole(
-        'checkbox', { name: /^favorite$/i }
+        'checkbox', { name: /^Pokémon favoritado\?$/i },
       );
 
       expect(favoriteCheckbox).not.toBeChecked();
@@ -53,7 +72,14 @@ describe('Test the FavoritePokemons component', () => {
       const favoritesLink = screen.getByRole('link', { name: /^Favorite Pokémons$/i });
       userEvent.click(favoritesLink);
       const pokemonName = screen.getByTestId('pokemon-name');
-      expect(pokemonName).toHaveTextContent(/^Pikachu$/i); */
+      expect(pokemonName).toHaveTextContent(/^Pikachu$/i);
+
+      userEvent.click(moreDetailsLink);
+      expect(favoriteCheckbox).toBeChecked();
+      userEvent.click(favoriteCheckbox);
+      expect(favoriteCheckbox).not.toBeChecked();
+      userEvent.click(favoritesLink);
+      // expect(pokemonName).not.toHaveTextContent(/^Pikachu$/i); */
     });
 
   test('if no Pokémon card is displayed, if it is not favorited',
@@ -82,6 +108,8 @@ describe('Test the FavoritePokemons component', () => {
       userEvent.click(favoritesLink);
 
       const pokemonName = queryByTestId('pokemon-name');
+      console.log(pokemonName.textContent);
+      expect(screen.getByText('No favorite pokemon found')).toBeInTheDocument();
       expect(pokemonName).toBeNull(); */
     });
 });
