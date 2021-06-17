@@ -1,9 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router';
 
-import { createMemoryHistory } from 'history';
 import { PokemonDetails } from '../components';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
@@ -105,8 +103,7 @@ describe('Test the PokemonDetails component', () => {
 
   test(`if the user can bookmark a pokemon through 
   the details page`, async () => {
-    const pokemon = Pikachu;
-    const { container } = renderWithRouter(
+    renderWithRouter(
       <App />,
     );
 
