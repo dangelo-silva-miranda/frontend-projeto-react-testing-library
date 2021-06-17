@@ -44,7 +44,7 @@ describe('Test the FavoritePokemons component', () => {
   });
 
   test('if all favorite Pokemon cards are displayed',
-    () => {
+    () => { // MANDAR PR PARA EDU PARA VERIFICAR FLUXO DO USUÁRIO EM FAVORITEPOKEMONS
       renderWithRouter(
         <FavoritePokemons pokemons={ [Pikachu] } />,
       );
