@@ -86,7 +86,8 @@ describe('Test the Pokemon component', () => {
       />,
     );
 
-    const pokemonImage = screen.getByRole('img', { name: /is marked as favorite$/i });
+    const pokemonImage = screen.getByRole('img',
+      { name: `${pokemon.name} is marked as favorite` });
     expect(pokemonImage).toBeInTheDocument();
     expect(pokemonImage.src).not.toBe('');
     const allImages = Array.from(screen.getAllByRole('img'));
@@ -95,5 +96,8 @@ describe('Test the Pokemon component', () => {
       expect(i.src).not.toBe('');
       expect(i).not.toHaveAttribute('alt', '');
     });
+
+    // alt={`${name} ` + `is marked as favorite`}
+    // alt={"" + `is marked as favorite`}
   });
 });
