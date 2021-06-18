@@ -93,6 +93,7 @@ describe('Test the Pokemon component', () => {
 
     allImages.forEach((i) => {
       expect(i.src).not.toBe('');
+      expect(i).not.toHaveAttribute('alt', '');
     });
   });
 });
